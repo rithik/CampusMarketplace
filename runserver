@@ -1,4 +1,0 @@
-#!/bin/bash
-python campusmarketplace/manage.py makemigrations
-python campusmarketplace/manage.py migrate
-python campusmarketplace/manage.py runserver 8080

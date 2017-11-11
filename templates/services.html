@@ -16,14 +16,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <!-- Bootstrap Core CSS -->
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="services.js"></script>
         
         <!-- Theme CSS -->
-        <link href="css/freelancer.css" rel="stylesheet">
+        <link href="../static/css/freelancer.css" rel="stylesheet">
         
         <!-- Custom Fonts -->
-        <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+        <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
     </head>
@@ -40,7 +40,8 @@
                 <a class="navbar-brand" href="index.html">Campus Marketplace</a>
         </div>
         <div class="navbar-form navbar-right">
-            <button id="sign" class="btn btn-primary text-justify text-uppercase">Log In</button>
+            <button id="sign" class="btn btn-primary text-justify text-uppercase">Log In</button>  
+            <!--Edit this so it knows when someone it logged in-->
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -59,47 +60,49 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">
-                            <h2>Provide Services?</h2>
+                            <h2>Add Services?</h2>
                             <hr class="star-light">
                         </div>
                     </div>
                     <div class="row">
                             <p align:center>
                             <div class="col-lg-8 col-lg-offset-2 text-center">
-                           <input type="text" name="name" class="form-control" placeholder="Name" required="required" maxlength="50" id="provider">
-                            <input type="text" name="service" class="form-control" placeholder="Service" required="required" maxlength="50" id="service1">
-                            <button id = "provideSubmit" class="btn btn-success login" style = "background-color:#18BC9C" type="submit"> Submit</button>
+                                
+                                
+                            <label for="title" class="col-form-label col-form-label-lg">Title</label>
+                            <input type="text" name="title" class="form-control" placeholder="Title" required="required" maxlength="50" id="title">
+                            
+                            
+                            <label for="price" class="col-form-label col-form-label-lg">Price</label>
+                            <input type="number" min="1" step="any" name="price" class="form-control" placeholder="Price" required="required" id="price">
+                            
+                            
+                            <div class="form-group">
+                                <label for="description" class="col-form-label col-form-label-lg">Description</label>
+                                <textarea class="form-control" id="description" rows="3" placeholder="Description" required="required" maxlength="100"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                              <label for="sel1">Select Category:</label>
+                              <select class="form-control" placeholder="Category" id="sel1">
+                                <option>Category</option>
+                                <option>Transportion</option>
+                                <option>Food</option>
+                                <option>Tutoring</option>
+                                <option>Fashion</option>
+                                <option>Deliveries</option>
+                                <option>Technical Help</option>
+                                <option>Other</option>
+                              </select>
+                            </div>
+                                                        
+                            <button id = "provideSubmit" disabled class="btn btn-success login" style = "background-color:#18BC9C" type="submit"> Submit</button>
                             <div id="output1"></div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <section class="failure" id="buy">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12 text-center">
-                            <h2 style="color:#069">Buy Services?</h2>
-                            <hr class="star-light">
-                        </div>
-                    </div>
-                    <div class="row">
-                            <p align:center>
-                            <div class="col-lg-8 col-lg-offset-2 text-center">
-                            <input type="text" name="name" class="form-control" placeholder="Name" required="required" maxlength="50" id="buyer">
-                            <input type="text" name="service" class="form-control" placeholder="Service" required="required" maxlength="50" id="service2">
-                            <br> <br>
-                            <button id = "retrieveSubmit" class="btn btn-primary login" style = "background-color:#069" type="submit"> Submit</button>
-                            <div id="output2"></div>
-                            <div id = "prospectiveBuyOptions">
-                                
-                                <!--need to get all options for the Service selected-->
-                            </div>
-                        </div>
-                    </div>
-                    <div id = "sellers" class = "hidden">Random Text</div>
-                    
-                </div>
-            </section>
+            
+            
                 
             <!-- /.container-fluid -->
         

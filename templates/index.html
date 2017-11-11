@@ -12,19 +12,20 @@
     <title>Campus Marketplace- Web 2017</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/freelancer.css" rel="stylesheet">
+    <link href="../static/css/freelancer.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
 
     <!-- Custom Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">-->
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
-    <script type='text/javascript' src="index.js"></script>
+    <script type='text/javascript' src="../static/js/index.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,7 +47,8 @@
                 <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
         </div>
         <div class="navbar-form navbar-right">
-            <button id="sign" class="btn btn-primary text-justify text-uppercase">Log In</button>
+            <button id="login" class="btn btn-primary text-justify text-uppercase">Log In</button>
+            <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Log in (Modal)</button>
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -58,17 +60,104 @@
                     <a href="#about">About Us</a>
                 </li>
           </ul>
+          
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+    
+    <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><center>Welcome to Campus Marketplace!</center></h4>
+              </div>
+              <div class="modal-body">
+
+						    <div class=" panel-login">
+								<div class="panel-heading panel panel-login">
+									<div class="row">
+										<div class="col-xs-6">
+											<a href="#" class="active" id="login-form-link">Login</a>
+										</div>
+										<div class="col-xs-6">
+											<a href="#" id="register-form-link">Register</a>
+										</div>
+									</div>
+									<hr>
+								</div>
+													<div class="panel-body">
+														<div class="row">
+															<div class="col-lg-12">
+																<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+																	<div class="form-group">
+																		<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+																	</div>
+																	<div class="form-group">
+																		<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+																	</div>
+																	<div class="form-group text-center">
+																		<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
+																		<label for="remember"> Remember Me</label>
+																	</div>
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-sm-6 col-sm-offset-3">
+																				<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-lg-12">
+																				<div class="text-center">
+																					<a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</form>
+																<form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
+																	<div class="form-group">
+																		<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
+																	</div>
+																	<div class="form-group">
+																		<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+																	</div>
+																	<div class="form-group">
+																		<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+																	</div>
+																	<div class="form-group">
+																		<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+																	</div>
+																	<div class="form-group">
+																		<div class="row">
+																			<div class="col-sm-6 col-sm-offset-3">
+																				<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+																			</div>
+																		</div>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+              </div>
+            </div>
+        
+          </div>
+        </div>
 
     <!-- Header -->
-    <header style = "background-image: url(&quot;http://www.cornell.edu/assets/images/visit/campustour.jpg&quot;);">
+   
+    <header style = "background-image: url(&quot;../static/img/campustour.jpg&quot;);">
         
         <div class="container" id="maincontent" tabindex="-1">
             <div class="row">
                 <div  class="col-lg-12">
-                    <img class = "img-circle" height="500" width="500"  src="img/Logo.svg" alt="">
+                    <img class = "img-circle" height="500" width="500"  src="../static/img/Logo.svg" alt="">
                     <div class="intro-text">
                         <h1 class="name">Campus Marketplace</h1>
                         <hr class="star-light">
@@ -81,6 +170,7 @@
 
     <!-- About Section -->
     <section class="success" id="about">
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -104,27 +194,31 @@
   <div class="row">
     <div class="col-md-3">
       <h2>Exclusive</h2>
-      <p><img src="http://mylamplighters.com/campus-marketplace/img/campus.png" class="large-icon" style = "height:100px;width:100px;"></p>
-      <p>Only those with a tjhsst.edu email address can sign up.</p>
+      <p><img src="../static/img/Exclusive.png" class="large-icon" style = "height:100px;width:100px;"></p>
+      <p>Only those with a .edu email address can sign up.</p>
     </div>
     <div class="col-md-3">
       <h2>Sell</h2>
-      <p><img src="http://mylamplighters.com/campus-marketplace/img/sell.png" class="large-icon" style = "height:100px;width:100px;"></p>
+      <p><img src="../static/img/Buy.png" class="large-icon" style = "height:100px;width:100px;"></p>
       <p>Post services you'd like to sell to your peers with our easy-to-use interface.</p>
    </div>
     <div class="col-md-3">
       <h2>Negotiate</h2>
-      <p><img src="http://mylamplighters.com/campus-marketplace/img/negotiate.gif" class="large-icon" style = "height:100px;width:100px;"></p>
+      <p><img src="../static/img/n.png" class="large-icon" style = "height:100px;width:100px;"></p>
       <p>Use our messaging system to chat between seller and buyer and negotiate.</p>
    </div>
     <div class="col-md-3">
       <h2>Buy</h2>
-      <p><img src="http://mylamplighters.com/campus-marketplace/img/buy.png" class="img-rounded" style = "height:100px;width:100px;"></p>
+      <p><img src="../static/img/Sell.png" class="img-rounded" style = "height:100px;width:100px;"></p>
       <p>Search for services or browse through available services by category. Sort options available.</p>
     </div>
   </div>
 
   <p><a href="login.html" class="btn btn-primary btn-lg nav-justified" id="register-now" role="button">Register Now</a></p>
+  <button class="btn btn-success dim">Dim the page!</button>
+  <div class="dimmer">
+    <span class="exit">&times;</span>
+  </div>
 </div>
 
     <!-- Contact Section -->
@@ -235,185 +329,9 @@
         </a>
     </div>
 
-    <!-- Portfolio Modals -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Basketball</h2>
-                            <hr class="star-primary">
-                            <img src="img/ball.jpg" class="img-responsive img-centered" alt="">
-                            <p>We offer basketball as our highlighted sport.  You can meet a stranger and play 1 v 1 or a full 5 v 5 game.  Its your choice!</p>
-                            <ul class="list-inline item-details">
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/soccer.jpeg" class="img-responsive img-centered" alt="">
-                            <p>The app also allows you to meet up with a group of friends or strangers to playy any form of soccer, the international favorite, wherever you want!</p>
-                            <ul class="list-inline item-details">
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/tennis.jpg" class="img-responsive img-centered" alt="">
-                            <p>Small ball sports are not excluded from this app!  Tennis is still a popular sport among the world and Pickup offers you a chance to meet with a new friend and enjoy a match.</p>
-                            <ul class="list-inline item-details">
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/football.jpg" class="img-responsive img-centered" alt="">
-                            <p>Last but not least, football.  Football is the American sport and you can always play football, tackle or not tackle, wherever, whenever.</p>
-                            <ul class="list-inline item-details">
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/safe.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>s
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-content">
-            <div class="close-modal" data-dismiss="modal">
-                <div class="lr">
-                    <div class="rl">
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2">
-                        <div class="modal-body">
-                            <h2>Project Title</h2>
-                            <hr class="star-primary">
-                            <img src="img/portfolio/submarine.png" class="img-responsive img-centered" alt="">
-                            <p>Use this area of the page to describe your project. The icon above is part of a free icon set by <a href="https://sellfy.com/p/8Q9P/jV3VZ/">Flat Icons</a>. On their website, you can download their free set with 16 icons, or you can purchase the entire set with 146 icons for only $12!</p>
-                            <ul class="list-inline item-details">
-                                <li>Client:
-                                    <strong><a href="http://startbootstrap.com">Start Bootstrap</a>
-                                    </strong>
-                                </li>
-                                <li>Date:
-                                    <strong><a href="http://startbootstrap.com">April 2014</a>
-                                    </strong>
-                                </li>
-                                <li>Service:
-                                    <strong><a href="http://startbootstrap.com">Web Development</a>
-                                    </strong>
-                                </li>
-                            </ul>
-                            <button id="btnSubmit" type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
 
     <!-- Plugin JavaScript -->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>-->
@@ -423,7 +341,7 @@
     <!--<script src="js/contact_me.js"></script>-->
 
     <!-- Theme JavaScript -->
-    <script src="js/freelancer.min.js"></script>
+    <!--<script src="../static/js/freelancer.min.js"></script>-->
 
 </body>
 

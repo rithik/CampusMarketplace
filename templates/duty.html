@@ -10,12 +10,14 @@
         <title>Campus Marketplace- Web 2017</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         
-        <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
         <!-- Bootstrap Core CSS -->
         <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <script src="../static/js/services.js"></script>
+        <script src="services.js"></script>
         
         <!-- Theme CSS -->
         <link href="../static/css/freelancer.css" rel="stylesheet">
@@ -35,26 +37,37 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
+                <a class="navbar-brand" href="index.html">Campus Marketplace</a>
         </div>
-        <div style="margin-right:20px;" class="navbar-form navbar-right">
-            <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Log in/Register</button>
+        <div class="navbar-form navbar-right">
+            <button id="sign" class="btn btn-primary text-justify text-uppercase">Log In</button>  
+            <!--Edit this so it knows when someone it logged in-->
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
-
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+                <li class="page-scroll">
+                    <a href="services.html">Services</a>
+                </li>
+                <li class = "page-scroll">
+                    <a href="#about">About Us</a>
+                </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
             <header class="success" id="provide">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">
-                            <h2>Add Services?</h2>
+                            <h2>Service</h2>
                             <hr class="star-light">
                         </div>
                     </div>
                     <div class="row">
                             <p align:center>
                             <div class="col-lg-8 col-lg-offset-2 text-center">
+                                
                                 
                             <label for="title" class="col-form-label col-form-label-lg">Title</label>
                             <input type="text" name="title" class="form-control" placeholder="Title" required="required" maxlength="50" id="title">
@@ -88,6 +101,11 @@
                         </div>
                     </div>
                 </div>
+            
+            
+                
+            <!-- /.container-fluid -->
+        
         
     </body>
 </html>

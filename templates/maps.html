@@ -28,7 +28,7 @@
              id = "to"
              value = "" 
              placeholder = ""
-             onkeypress="keyhandle(event)"/>
+             />
     </p>
     <input type="button" id="submitButton" class="btn btn-primary" value="Submit" />
     <br/>
@@ -47,22 +47,23 @@
             <div class="panel-body" id="TransitTime"></div>
             </div>
         </div>
-        
+    
+    <div class="col-md-3"><div class="panel panel-info">
+      <div class="panel-heading">Fuck yourself</div>
+      <div class="panel-body" id="optimalPath"></div>
+    </div>
+    </div>
+    
     <div class="col-md-3"><div class="panel panel-info">
       <div class="panel-heading">Walking Time</div>
       <div class="panel-body" id="WalkingTime"></div>
     </div>
     </div>
     
+    
     <div class="col-md-3"><div class="panel panel-info">
       <div class="panel-heading">Bicycling Time</div>
       <div class="panel-body" id="BicyclingTime"></div>
-    </div></div>
-
-    
-    <div class="col-md-3"><div class="panel panel-info">
-      <div class="panel-heading">Fuck Yourself</div>
-      <div class="panel-body" id="optimalPath"></div>
     </div></div>
     </div></div>
     
@@ -92,8 +93,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     
-   <script type="text/javascript" src="https://www.google.com/jsapi?key=AIzaSyCJ9faDR8ah7Liqz3TdqCdhk-VQXXM0Vck&fo"></script>
-   <script type="text/javascript"charset="utf-8">google.load("maps","2.x"); google.load("jquery","1.3.1");</script>
+   <script type="text/javascript" src="https://www.google.com/jsapi?key=AIzaSyCJ9faDR8ah7Liqz3TdqCdhk-VQXXM0Vck&fo">
+    <script type="text/javascript"charset="utf-8">google.load("maps","2.x"); google.load("jquery","1.3.1");</script>
 
     <script>
     var contents;
@@ -103,6 +104,11 @@
     var transitTime;
     var walkingTime;
     var bicyclingTime;
+    
+    var drive
+    var trans
+    var walk
+    var bike
     
     var drivingDistance;
     var transitDistance;
@@ -129,6 +135,7 @@
                                 console.log(drivingTime);
                                 $("#DrivingTime").html(drivingTime);
                                 $("#DrivingD").html(drivingDistance);
+                                
                          });
                          $.ajax({
                 			  method: "GET",
@@ -173,16 +180,17 @@
                                 bicyclingDistance = (parseInt(JSON.parse(json_contents)["rows"][0]["elements"][0]["distance"]["text"].replace ( /[^\d.]/g, '' )) * 0.621371).toFixed(1) + " miles"
                                 console.log(bicyclingTime);
                                 $("#BicyclingTime").html(bicyclingTime);
-                                $("#BicyclingD").html(bicyclingDistance);
+               vb b                  $("#BicyclingD").html(bicyclingDistance);
                          });
                          
                         });
+                     
+                     lowestValue = Math.min(Math.min(drivingTime,walkingTime),Math.min(bicyclingTime,transitTime))
+                     
+                     $("#optimalPath").html(lowestValue);
                      });
                 });
-            lowestValue = Math.min(Math.min(drivingTime,walkingTime),Math.min(bicyclingTime,transitTime))
-            $("#optimalPath").html(lowestValue);
         });
-    
     </script>
   </body>
 </html>
@@ -251,8 +259,6 @@
         });
       }
     </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO13Pq0r-8XoJtlkCUuS8uIB8-iaN0qvA&callback=initMap">
-    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCO13Pq0r-8XoJtlkCUuS8uIB8-iaN0qvA&callback=initMap"> </script>
   </body>
 </html>

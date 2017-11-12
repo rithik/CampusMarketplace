@@ -59,49 +59,36 @@
             <header class="success" id="provide">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-12 text-center">
+                        <div class="col-lg-1 text-left">
                             <h2>Service</h2>
                             <hr class="star-light">
                         </div>
                     </div>
-                    <div class="row">
-                            <p align:center>
-                            <div class="col-lg-8 col-lg-offset-2 text-center">
-                                
-                                
-                            <label for="title" class="col-form-label col-form-label-lg">Title</label>
-                            <input type="text" name="title" class="form-control" placeholder="Title" required="required" maxlength="50" id="title">
-                            
-                            
-                            <label for="price" class="col-form-label col-form-label-lg">Price</label>
-                            <input type="number" min="1" step="any" name="price" class="form-control" placeholder="Price" required="required" id="price">
-                            
-                            
-                            <div class="form-group">
-                                <label for="description" class="col-form-label col-form-label-lg">Description</label>
-                                <textarea class="form-control" id="description" rows="3" placeholder="Description" required="required" maxlength="100"></textarea>
+                    <div class="container">
+                            <p align:left>
+                            <div class="col-lg-8 col-lg-offset- text-left">
+                            <p><label for="Service" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Service Title</font></label></p>
+                            <div>
+                                <p style="float: left;"><img src="../static/img/n.png" height="200px" width="200px" border="1px"></p>
+                                <p style="font-size: 100%">Posted by: <a href="http://www.hyperlinkcode.com/"> User</a></p>
                             </div>
                             
                             <div class="form-group">
-                              <label for="sel1">Select Category:</label>
-                              <select class="form-control" placeholder="Category" id="sel1">
-                                <option>Category</option>
-                                <option>Transportion</option>
-                                <option>Food</option>
-                                <option>Tutoring</option>
-                                <option>Fashion</option>
-                                <option>Deliveries</option>
-                                <option>Technical Help</option>
-                                <option>Other</option>
-                              </select>
+                              <p><label for="description"><b>Description: </b><p style="font-size:100%;">Text</p></label></p>
+                              <p><b>Market price: </b> $Insert Number headass.99</p>
                             </div>
-                                                        
-                            <button id = "provideSubmit" disabled class="btn btn-success login" style = "background-color:#18BC9C" type="submit"> Submit</button>
-                            <div id="output1"></div>
                         </div>
                     </div>
+                    <p><label for="Review" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Review</font></label></p>
+                    <span class="a-icon-alt">3.5 out of 5 stars</span>
+                    <div class="form-group">
+                                <label for="review" class="col-form-label col-form-label-lg">Write your review here</label>
+                                <textarea class="form-control" id="review" rows="3" placeholder="Review" maxlength="250"></textarea>
+                    </div>
+                    <button id = "provideReview" disabled class="btn btn-info login" style = "background-color:#18BC9C" type="submit"> Submit</button>
+
                 </div>
-            
+        
             
                 
             <!-- /.container-fluid -->

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Campus Marketplace- Web 2017</title>
+    <title>Campus Marketplace</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -36,7 +36,6 @@
 </head>
 
 <body id="page-top" class="index">
-<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
     <nav id = "mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
       <div class="container-fluid">
          <!--Brand and toggle get grouped for better mobile display -->
@@ -46,25 +45,14 @@
                 </button>
                 <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
         </div>
-        <div class="navbar-form navbar-right">
-            <button id="login" class="btn btn-primary text-justify text-uppercase">Log In</button>
-            <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Log in (Modal)</button>
+        <div style="margin-right:20px;" class="navbar-form navbar-right">
+            <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Log in/Register</button>
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-                <li class="page-scroll">
-                    <a href="services.html">Services</a>
-                </li>
-                <li class = "page-scroll">
-                    <a href="#about">About Us</a>
-                </li>
-          </ul>
-          
-        </div><!-- /.navbar-collapse -->
+
       </div><!-- /.container-fluid -->
     </nav>
-    
+
     <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <!-- Modal content-->
@@ -74,94 +62,90 @@
                 <h4 class="modal-title"><center>Welcome to Campus Marketplace!</center></h4>
               </div>
               <div class="modal-body">
+                    <div class=" panel-login">
+                    	<div class="panel-heading panel panel-login">
+                    		<div class="row">
+                    			<div class="col-xs-6">
+                    				<a href="#" class="active" id="login-form-link">Login</a>
+                    			</div>
+                    			<div class="col-xs-6">
+                    				<a href="#" id="register-form-link">Register</a>
+                    			</div>
+                    		</div>
+                    		<hr>
+                    	</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<form id="login-form" action="/login" method="post" role="form" style="display: block;">
+										<div class="form-group">
+											<input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+										</div>
+										<div class="form-group">
+											<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										</div>
 
-						    <div class=" panel-login">
-								<div class="panel-heading panel panel-login">
-									<div class="row">
-										<div class="col-xs-6">
-											<a href="#" class="active" id="login-form-link">Login</a>
-										</div>
-										<div class="col-xs-6">
-											<a href="#" id="register-form-link">Register</a>
-										</div>
-									</div>
-									<hr>
-								</div>
-													<div class="panel-body">
-														<div class="row">
-															<div class="col-lg-12">
-																<form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
-																	<div class="form-group">
-																		<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-																	</div>
-																	<div class="form-group">
-																		<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-																	</div>
-																	<div class="form-group text-center">
-																		<input type="checkbox" tabindex="3" class="" name="remember" id="remember">
-																		<label for="remember"> Remember Me</label>
-																	</div>
-																	<div class="form-group">
-																		<div class="row">
-																			<div class="col-sm-6 col-sm-offset-3">
-																				<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
-																			</div>
-																		</div>
-																	</div>
-																	<div class="form-group">
-																		<div class="row">
-																			<div class="col-lg-12">
-																				<div class="text-center">
-																					<a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</form>
-																<form id="register-form" action="https://phpoll.com/register/process" method="post" role="form" style="display: none;">
-																	<div class="form-group">
-																		<input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-																	</div>
-																	<div class="form-group">
-																		<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-																	</div>
-																	<div class="form-group">
-																		<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-																	</div>
-																	<div class="form-group">
-																		<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-																	</div>
-																	<div class="form-group">
-																		<div class="row">
-																			<div class="col-sm-6 col-sm-offset-3">
-																				<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
-																			</div>
-																		</div>
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
 												</div>
 											</div>
+										</div>
+									</form>
+									<form id="register-form" action="/register" method="post" role="form" style="display: none;">
+                                        <div class="form-group">
+                                            <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control" placeholder="First Name" value="">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="last_name" id="last_name" tabindex="1" class="form-control" placeholder="Last Name" value="">
+                                        </div>
+										<div class="form-group">
+											<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+										</div>
+										<div class="form-group">
+											<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										</div>
+										<div class="form-group">
+											<input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
+										</div>
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-login" value="Register Now">
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
               </div>
             </div>
-        
+
           </div>
         </div>
 
     <!-- Header -->
-   
+
     <header style = "background-image: url(&quot;../static/img/campustour.jpg&quot;);">
-        
+
         <div class="container" id="maincontent" tabindex="-1">
             <div class="row">
                 <div  class="col-lg-12">
-                    <img class = "img-circle" height="500" width="500"  src="../static/img/Logo.svg" alt="">
+                    <center>
+                        <img class = "img-circle" height="500" width="500" style="margin-top: 50px;" src="../static/img/Logo.svg" alt="">
+                    </center>
                     <div class="intro-text">
-                        <h1 class="name">Campus Marketplace</h1>
+                        <center>
+                            <h1 class="name" style="color:white;">Campus Marketplace</h1>
+                        </center>
                         <hr class="star-light">
-                        <span class="skills">A place to sell or buy goods/services, exclusively for high school and college students.</span>
+                        <center>
+                            <h4 class="skills" style="color:white;">A place to sell or buy goods/services, exclusively for high school and college students.</h4>
+                        </center>
                     </div>
                 </div>
             </div>
@@ -170,7 +154,7 @@
 
     <!-- About Section -->
     <section class="success" id="about">
-        
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
@@ -179,7 +163,7 @@
                 </div>
             </div>
             <div class="row">
-                
+
                     <p align:center>
                     There is currently no means for college students to offer their skills and services in the campus community. Campus Marketplace is an online platform where students can easily find or offer affordable services to practice their talents. Since it is exclusive to college students, the marketplace will have a positive impact on campus community, and help bring students together. the prototype.
                 <div class="col-lg-8 col-lg-offset-2 text-center">
@@ -187,40 +171,41 @@
             </div>
         </div>
     </section>
-    
+
     <div class="container content-centered">
   <h1 class = "text-center">Features</h1>
-  <!-- Row of columns -->
+  <hr class="star-primary">
   <div class="row">
     <div class="col-md-3">
-      <h2>Exclusive</h2>
-      <p><img src="../static/img/Exclusive.png" class="large-icon" style = "height:100px;width:100px;"></p>
-      <p>Only those with a .edu email address can sign up.</p>
+        <center>
+            <h2>Exclusive</h2>
+            <p><img src="../static/img/Exclusive.png" class="large-icon" style = "height:100px;width:100px;"></p>
+            <p>Only those with a .edu email address can sign up.</p>
+        </center>
     </div>
     <div class="col-md-3">
-      <h2>Sell</h2>
-      <p><img src="../static/img/Buy.png" class="large-icon" style = "height:100px;width:100px;"></p>
-      <p>Post services you'd like to sell to your peers with our easy-to-use interface.</p>
+        <center>
+          <h2>Sell</h2>
+          <p><img src="../static/img/Buy.png" class="large-icon" style = "height:100px;width:100px;"></p>
+          <p>Post services you'd like to sell to your peers with our easy-to-use interface.</p>
+      </center>
    </div>
     <div class="col-md-3">
-      <h2>Negotiate</h2>
-      <p><img src="../static/img/n.png" class="large-icon" style = "height:100px;width:100px;"></p>
-      <p>Use our messaging system to chat between seller and buyer and negotiate.</p>
+        <center>
+            <h2>Negotiate</h2>
+            <p><img src="../static/img/n.png" class="large-icon" style = "height:100px;width:100px;"></p>
+            <p>Use our messaging system to chat between seller and buyer and negotiate.</p>
+        </center>
    </div>
     <div class="col-md-3">
-      <h2>Buy</h2>
-      <p><img src="../static/img/Sell.png" class="img-rounded" style = "height:100px;width:100px;"></p>
-      <p>Search for services or browse through available services by category. Sort options available.</p>
+        <center>
+          <h2>Buy</h2>
+          <p><img src="../static/img/Sell.png" class="img-rounded" style = "height:100px;width:100px;"></p>
+          <p>Search for services or browse through available services by category. Sort options available.</p>
+        </center>
     </div>
-  </div>
-
-  <p><a href="login.html" class="btn btn-primary btn-lg nav-justified" id="register-now" role="button">Register Now</a></p>
-  <button class="btn btn-success dim">Dim the page!</button>
-  <div class="dimmer">
-    <span class="exit">&times;</span>
   </div>
 </div>
-
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
@@ -316,7 +301,7 @@
         <div class="footer-below">
             <div class="container">
                 <div class="row">
-                    
+
                 </div>
             </div>
         </div>

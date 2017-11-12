@@ -16,6 +16,12 @@ app.secret_key = settings.SECRET_KEY
 
 #db.session.add(u)
 #db.session.commit()
+#filter with .filter_by(univ=univ).all()
+
+# {% for p in picures %}
+# set-up
+# {% endfor %}
+
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
@@ -27,12 +33,46 @@ def signout():
     flash('You were logged out!')
     return redirect(url_for('home_page'))
 
+@app.route('/service/<id_num>', methods=["GET"])
+def service_info(id_num):
+    messages = session["messages"]
+    service = Service.query.filter_by(id=id_num).first()
+    try:
+        title = service.title
+        desc = service.description
+        price = service.price
+        user = User.query.filter_by(id=service.requested_by).first()
+        name = user.first_name + " " + user.last_name
+        return render_template("duty.html", title=title, desc=desc, price=price, full_name=name, rating=0)
+    except:
+        return redirect(url_for('.account'))
+
 @app.route('/service/add', methods=["GET"])
 def service_add():
     messages = session["messages"]
-    user = User.query.filter_by(id=messages[messages.index(":")+1:len(messages)-1]).first()
+    user_id = messages[messages.index(":")+1:len(messages)-1]
+    user = User.query.filter_by(id=user_id).first()
     name = user.first_name + " " + user.last_name
-    return render_template("services.html", name=name, email=user.email)
+    return render_template("services.html")
+
+@app.route('/service/add/post', methods=["POST"])
+def service_add_post():
+    from flask import request
+    messages = session["messages"]
+    user_id = messages[messages.index(":")+1:len(messages)-1]
+    user = User.query.filter_by(id=user_id).first()
+    name = user.first_name + " " + user.last_name
+    title = request.form["title"]
+    price = float(request.form["price"])
+    desc = request.form["desc"]
+    category = request.form["category"]
+    address = request.form["address"]
+    requested_by = user_id
+    request = 0
+    s = Service(title, price, desc, category, address, requested_by, request)
+    db_session.add(s)
+    db_session.commit()
+    return redirect(url_for('.account'))
 
 @app.route('/account', methods=["GET"])
 def account():

@@ -28,12 +28,13 @@ class User(Base):
         return '<email {}>'.format(self.email)
 
 class Service(Base):
+    from models import User
     __tablename__ = 'services'
 
     id = Column(Integer, primary_key=True)
     title = Column(String(200))
     price = Column(Float())
-    description = Column(String(100))
+    description = Column(String(800))
     category = Column(String(100))
     address = Column(String(200))
     requested_by = Column(Integer) # ID of the request user
@@ -49,7 +50,8 @@ class Service(Base):
         self.address = address
         self.requested_by = requested_by
         self.request = request
-        self.university = self.requested_by.university
+        self.completed_by = -1
+        self.university = User.query.filter_by(id=self.requested_by).first().university
 
     def __repr__(self):
         return '<title {}>'.format(self.title)

@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        
-        <title>Campus Marketplace- Web 2017</title>
+
+        <title>Campus Marketplace</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        
+
         <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
@@ -18,10 +18,10 @@
         <!-- Bootstrap Core CSS -->
         <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <script src="services.js"></script>
-        
+
         <!-- Theme CSS -->
         <link href="../static/css/freelancer.css" rel="stylesheet">
-        
+
         <!-- Custom Fonts -->
         <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -29,7 +29,6 @@
     </head>
     <body id="page-top" class="index">
         <!-- Navigation -->
-        <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
         <nav id = "mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
       <div class="container-fluid">
          <!--Brand and toggle get grouped for better mobile display -->
@@ -39,21 +38,14 @@
                 </button>
                 <a class="navbar-brand" href="index.html">Campus Marketplace</a>
         </div>
-        <div class="navbar-form navbar-right">
-            <button id="sign" class="btn btn-primary text-justify text-uppercase">Log In</button>  
+        <div class="navbar-form navbar-right" style="margin-right: 20px;">
+            <button id="sign" class="btn btn-primary text-justify text-uppercase">Services</button>
+            <button id="sign" class="btn btn-primary text-justify text-uppercase">About Me</button>
+            <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../signout'">Sign Out</button>
             <!--Edit this so it knows when someone it logged in-->
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-                <li class="page-scroll">
-                    <a href="services.html">Services</a>
-                </li>
-                <li class = "page-scroll">
-                    <a href="#about">About Us</a>
-                </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
+
       </div><!-- /.container-fluid -->
     </nav>
             <header class="success" id="provide">
@@ -67,32 +59,30 @@
                     <div class="container">
                             <p align:left>
                             <div class="col-lg-8 col-lg-offset- text-left">
-                            <p><label for="Service" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Service Title</font></label></p>
+                            <p><label for="Service" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">{{ title }}</font></label></p>
                             <div>
                                 <p style="float: left;"><img src="../static/img/n.png" height="200px" width="200px" border="1px"></p>
-                                <p style="font-size: 100%">Posted by: <a href="http://www.hyperlinkcode.com/"> User</a></p>
+                                <p style="font-size: 100%">Posted by: <a href="#">{{ full_name }}</a></p>
                             </div>
-                            
+
                             <div class="form-group">
-                              <p><label for="description"><b>Description: </b><p style="font-size:100%;">Text</p></label></p>
-                              <p><b>Market price: </b> $Insert Number headass.99</p>
+                              <p><label for="description"><b>Description: </b><p style="font-size:100%;">{{ desc }}</p></label></p>
+                              <p><b>Market Price: </b> ${{ price }}</p>
                             </div>
                         </div>
                     </div>
                     <p><label for="Review" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Review</font></label></p>
-                    <span class="a-icon-alt">3.5 out of 5 stars</span>
-                    <div class="form-group">
-                                <label for="review" class="col-form-label col-form-label-lg">Write your review here</label>
-                                <textarea class="form-control" id="review" rows="3" placeholder="Review" maxlength="250"></textarea>
-                    </div>
-                    <button id = "provideReview" disabled class="btn btn-info login" style = "background-color:#18BC9C" type="submit"> Submit</button>
+                    <span class="a-icon-alt">{% if rating > 0 %}{{ rating }} out of 5 stars {% else %} No Ratings Posted {% endif %}</span>
+                    <br/>
+                    <br/>
+                    <button id ="complete" class="btn btn-info login" style = "background-color:#18BC9C" type="submit"> I want to complete this task! </button>
 
                 </div>
-        
-            
-                
+
+
+
             <!-- /.container-fluid -->
-        
-        
+
+
     </body>
 </html>

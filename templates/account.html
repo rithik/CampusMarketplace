@@ -10,7 +10,7 @@
 
         <title>Campus Marketplace</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -41,6 +41,7 @@
                   <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
           </div>
           <div style="margin-right:20px;" class="navbar-form navbar-right">
+            <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '/home'">Services</button>
               <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../signout'">Sign Out</button>
           </div>
           <!--Collect the nav links, forms, and other content for toggling -->
@@ -76,12 +77,12 @@
                         <input type="text" id = 'editemail' value = 'Edit Email' class = "hidden"/></td>
                       </tr>
                       <tr>
-                        <td><b>Recent Requests:</b></td>
-                        <td>None</td>
+                        <td><b>Number of Requests:</b></td>
+                        <td>{{ num_requests }}</td>
                       </tr>
                       <tr>
-                        <td><b>Recent Services:</b></td>
-                        <td>None</td>
+                        <td><b>Number of Services:</b></td>
+                        <td>{{ num_services }}</td>
                       </tr>
                     </tbody>
                   </table>

@@ -6,10 +6,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        
-        <title>Campus Marketplace- Web 2017</title>
+
+        <title>Campus Marketplace</title>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-        
+
         <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
         <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
@@ -22,7 +23,7 @@
         <link href="../static/css/freelancer.css" rel="stylesheet">
         <link rel="stylesheet" href="../static/owl/owl.carousel.min.css">
         <link rel="stylesheet" href="../static/owl/owl.theme.default.min.css">
-        
+
         <!-- Custom Fonts -->
         <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -30,7 +31,6 @@
     </head>
     <body id="page-top" class="index">
         <!-- Navigation -->
-        <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
         <nav id = "mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
       <div class="container-fluid">
          <!--Brand and toggle get grouped for better mobile display -->
@@ -41,24 +41,17 @@
                 <a class="navbar-brand" href="index.html">Campus Marketplace</a>
         </div>
         <div class="navbar-form navbar-right">
-            <button id="sign" class="btn btn-primary text-justify text-uppercase">Log In</button>  
+            <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../home/All'">Services</button>
+            <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../account'">My Account</button>
+                <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../signout'">Sign Out</button>
             <!--Edit this so it knows when someone it logged in-->
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-                <li class="page-scroll">
-                    <a href="services.html">Services</a>
-                </li>
-                <li class = "page-scroll">
-                    <a href="#about">About Us</a>
-                </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
+
       </div><!-- /.container-fluid -->
     </nav>
             <header class="success" id="provide">
-                
+
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-1 text-left">
@@ -66,100 +59,75 @@
                             <hr class="star-light">
                         </div>
                     </div>
-                    <p><label for="Service" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Service Title</font></label></p>
+                    <p><label for="Service" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">{% if s.request == 0 %} Can you {% else %} I can{% endif %}{{ s.title|lower }}{% if s.request == 0 %} for me?{% else %} for you.{% endif %}</font></label></p>
                     <div class="container-fluid">
                     <div class="row">
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <p style="float: left;"><img src="../static/img/n.png" height="200px" width="200px" border="1px"></p>
+                            <p style="float: left;"><img src="../static/img/services/{{ s.filename }}" height="250px" width="350px" border="1px"></p>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 ">
-                             <p><label for="description"><b>Description: </b><p style="font-size:100%;">Text</p></label></p>
-                              <p><b>Market price: </b> $Insert Number headass.9</p>
+                             <p><label for="description"><b>Description: </b><p style="font-size:100%;">{{ s.description }}</p></label></p>
+                              <p><b>Price: </b> ${{ s.price }}</p>
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
                             <br></br>
                             <br></br>
-                            <button class="btn-lg btn-danger" style="width:70%;height:90%;">Buy it Now!</button>
+                            {% if not user.id == me %}
+                                <button class="btn-lg btn-danger" onclick="window.location.href = '/buy/{{ s.id }}'" style="width:70%;height:90%;">Buy it Now!</button>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-                    
-                    
-                   
+
+
+
                     <p><label for="Review" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Review</font></label></p>
-                    <span class="a-icon-alt">3.5 out of 5 stars</span>
-                    <div class="form-group">
-                                <label for="review" class="col-form-label col-form-label-lg">Write your review here</label>
-                                <textarea class="form-control" id="review" rows="3" placeholder="Review" maxlength="250"></textarea>
-                    </div>
-                    <button id = "provideReview" disabled class="btn btn-info login" style = "background-color:#18BC9C" type="submit"> Submit</button>
+                    <span class="a-icon-alt">{% if rating == 0 %} No reviews available {% else %} {{ rating }} out of 5 stars {% endif %}</span>
 
 
+<br/>
+<hr style="border-top: 1px solid #010;">
+
+<h3> Related Services </h3>
+
+{% if related|length > 0 %}
+    <div class="owl-carousel owl-theme">
+        {% for r in related %}
+            <div class="item" onclick="window.location.href = '/service/{{ r.id }}'">
+                <img src="../static/img/services/{{ r.filename }}" height="200px" width="300px" border="1px">
+                <p>Can you {{ r.title|lower }} for me? - ${{ '%0.2f'|format(r.price|float) }}</p>
+            </div>
+        {% endfor %}
+     </div>
+{% else %}
+    <h5> There are no related services in your university.</h5>
+{% endif %}
 
 
-
-
-
-
-
-<!--CARAULSULRSKEJF-->
-
-
-
-                </div>
-                    <div class="owl-carousel owl-theme">
-    <div class="item"><h4>
-        <img src="../static/img/n.png" height="200px" width="200px" border="1px"></div>
-    <div class="item">
-        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
-    </div>
-    <div class="item">
-        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
-    </div>
-    <div class="item">
-        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
-    </div>
-    <div class="item">
-        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
-    </div>
-    <div class="item">
-        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
-    </div>
-    <div class="item"></div>
-    <div class="item"></div>
-    <div class="item"></div>
-    <div class="item"></div>
-    <div class="item"></div>
-    <div class="item"></div>
-    </div>
-    
- </div>
-                   
-                
             <!-- /.container-fluid -->
-        
+
     <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script src="../static/owl/owl.carousel.min.js"></script>
     <script>
         $(document).ready(function(){
         $(".owl-carousel").owlCarousel();});
-        
+
         $('.owl-carousel').owlCarousel({
-            rtl:true,
-            loop:true,
+            // rtl:true,
+            // loop:true,
             margin:10,
-            nav:true,
-            responsive:{
-                0:{
-                    items:1
-                },
-                600:{
-                    items:3
-                },
-                1000:{
-                    items:5
-                }
-            }
+            // // nav:true,
+            // // responsive:{
+            // //     0:{
+            // //         items:1
+            // //     },
+            // //     600:{
+            // //         items:3
+            // //     },
+            // //     1000:{
+            // //         items:5
+            // //     }
+            // // }
         })
     </script>
     </body>

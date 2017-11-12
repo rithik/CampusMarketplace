@@ -16,13 +16,15 @@ class User(Base):
     email = Column(String(length=120), unique=True)
     password = Column(String(length=50))
     university = Column(String(length=20))
+    address = Column(String(length=200))
 
-    def __init__(self, first_name, last_name, email, password):
+    def __init__(self, first_name, last_name, email, password, address):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
         self.password = password
         self.university = email[email.index("@")+1:email.index(".")].lower()
+        self.address = address
 
     def __repr__(self):
         return '<email {}>'.format(self.email)
@@ -32,17 +34,18 @@ class Service(Base):
     __tablename__ = 'services'
 
     id = Column(Integer, primary_key=True)
-    title = Column(String(200))
+    title = Column(String(length=200))
     price = Column(Float())
-    description = Column(String(800))
-    category = Column(String(100))
-    address = Column(String(200))
+    description = Column(String(length=800))
+    category = Column(String(length=100))
+    address = Column(String(length=200))
     requested_by = Column(Integer) # ID of the request user
     completed_by = Column(Integer) # ID of the completed user
     request = Column(Integer) # 0 = request - i want this done # 1 - i will do this
     university = Column(String(length=20))
+    filename = Column(String(length=100))
 
-    def __init__(self, title, price, desc, category, address, requested_by, request):
+    def __init__(self, title, price, desc, category, address, requested_by, request, filename):
         self.title = title
         self.price = float(price)
         self.description = desc
@@ -52,6 +55,7 @@ class Service(Base):
         self.request = request
         self.completed_by = -1
         self.university = User.query.filter_by(id=self.requested_by).first().university
+        self.filename = filename.upper()
 
     def __repr__(self):
         return '<title {}>'.format(self.title)

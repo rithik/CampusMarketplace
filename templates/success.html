@@ -8,9 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Campus Marketplace- Web 2017</title>
+    <title>Campus Marketplace</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
@@ -28,7 +28,7 @@
     <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    
+
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <title>Directions service</title>
@@ -55,8 +55,7 @@
 
 <body id="page-top" class="index">
     <!-- Navigation -->
-        
-        <div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
+
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
         <div class="container-fluid">
             <!--Brand and toggle get grouped for better mobile display -->
@@ -67,20 +66,11 @@
                 <a class="navbar-brand" href="index.html">Campus Marketplace</a>
             </div>
             <div class="navbar-form navbar-right">
-                <button id="sign" class="btn btn-primary text-justify text-uppercase">Log In</button>
-                <!--Edit this so it knows when someone it logged in-->
+                <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../account'">My Account</button>
+                <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../signout'">Sign Out</button>                <!--Edit this so it knows when someone it logged in-->
             </div>
             <!--Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="page-scroll">
-                        <a href="services.html">Services</a>
-                    </li>
-                    <li class="page-scroll">
-                        <a href="#about">About Us</a>
-                    </li>
-                </ul>
-            </div>
+
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container-fluid -->
@@ -96,26 +86,23 @@
             <div class="container">
                 <p align:left>
                     <div class="col-lg-8 col-lg-offset- text-left">
-                        <p><label for="Service" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Service Title</font></label></p>
+                        <p><label for="Service" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3"> Purchase Successful: {% if s.request == 0 %} Can you {% else %} I can{% endif %}{{ s.title|lower }}{% if s.request == 0 %} for me?{% else %} for you.{% endif %}</font></label></p>
                         <div>
-                            <p style="float: left;"><img src="../static/img/n.png" height="400px" width="400px" border="1px"></p>
+                            <p style="float: left;"><img src="../static/img/services/{{ s.filename }}" height="400px" width="400px" border="1px"></p>
                             <p style="font-size: 100%">
-                                <font size="+3"><b>Offered by: </b><a href="http://www.hyperlinkcode.com/"> User</a></font>
+                                <font size="+2"><b>Offered by: </b> {{ user.first_name }} {{ user.last_name }} ({{ user.email }})</font>
                             </p>
                         </div>
 
                         <div class="form-group">
-                            <p><label for="description"><b>Description: </b><p style="font-size:100%;">Text</p></label></p>
-                            <p><b>Market price: </b> $Insert Number headass.99</p>
+                            <p><label for="description"><b>Description: </b><p style="font-size:100%;">{{ s.description }}</p></label></p>
+                            <p><b>Market price: </b> ${{ s.price }}</p>
                         </div>
-                        <div class="form-group">
-                            <p><label for="description"><b>Description: </b><p style="font-size:100%;">Text</p></label></p>
-                            <p><b>Offered price: </b> $Insert Number headass.99</p>
-                        </div>
+
                     </div>
             </div>
             <p><label for="Directions" class="col-lg-19 col-form-label col-form-label-lg"><font size="+3">Directions:</font></label></p>
-            
+
             <div class="container">
 
                 <div class="row">
@@ -147,27 +134,18 @@
                         </div>
                     </div>
                 </div>
-                <p class="text-black">
-                    <label>From Address</label></p>
-                <input type="text" id="from" value="" placeholder="" />
-                <input type="button" id="submitButton" class="btn btn-primary" value="Submit" />
-            
-                
-                <p class="text-black">
-                    <label>TO Address</label></p>
-                <input type="text" id="to" value="" placeholder="" />
-                
-                <div id = "map"></div>
 
+
+                <div id = "map"></div>
+                <input type="hidden" id="from" value="{{ me.address }}"/>
+                <input type="hidden" id="to" value="{{ s.address }}"/>
             </div>
 
-        <iframe class="map-top" width="598" height="450" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBaFzK3GF_7CMn2RBragFEOM74uCppB9nw&#10;    &amp;origin=Science+and+Engineering+Hall+George+Washington&amp;destination=Marvin+Center+Washington+DC&amp;avoid=tolls|highways" allowfullscreen=""></iframe>
-        
-        <p><span>
-            <button id = "accept" disabled class="btn btn-info login" width = "100" height = "50" style = "background-color:#18BC9C" type="accept"> Accept</button>
-            <button id = "decline" disabled class="btn btn-info login" style = "background-color:#18BC9C" type="decline">Decline </button>
-        </span></p>
-        </div>
+        <iframe class="map-top" width="598" height="450" src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyBaFzK3GF_7CMn2RBragFEOM74uCppB9nw&#10;    &amp;origin='{{ me.address }}'&amp;destination='{{ s.address }}'&amp;avoid=tolls|highways" allowfullscreen=""></iframe>
+
+          </div>
+
+
     </body>
 
 </html>

@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Campus Marketplace</title>
-
+     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <!-- Bootstrap Core CSS -->
     <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -57,8 +57,8 @@
                 <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
             </div>
             <div style="margin-right:20px;" class="navbar-form navbar-right">
-                <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">My Account</button>
-                <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Sign Out</button>
+                <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../account'">My Account</button>
+                <button type="button" class="btn btn-primary text-justify text-uppercase" onclick="window.location.href = '../signout'">Sign Out</button>
             </div>
             <!--Collect the nav links, forms, and other content for toggling -->
 
@@ -82,7 +82,7 @@
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-lg-12">
-                                <form id="request-form" action="/login" method="POST" role="form" style="display: block;">
+                                <form id="request-form" action="/service/add/post" method="POST" role="form" style="display: block;" enctype="multipart/form-data">
 
                                     <input type="text" style="margin-bottom:25px" name="title" class="form-control" placeholder="Title" required="required" maxlength="50" id="title">
 
@@ -105,15 +105,17 @@
                                             <option>Other</option>
                                           </select>
                                     </div>
-                                    <label class="btn btn-default btn-file" style="margin-bottom:25px">
-                                            Select Picture to Upload <input type="file" style="display: none;">
-                                        </label>
+<!--                                     <label class="btn btn-default btn-file" onchange="this.innerHTML = 'File Uploaded'" id="file_upload" style="margin-bottom:25px">
+                                            Select Picture to Upload <input type="file" style="display: none;" name="files">
+                                        </label> -->
+                                        <input type="file" name="file">
+
 
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="request" style="margin-bottom:25px"> Request
+                                        <input class="form-check-input" type="radio" name="request_service" id="inlineCheckbox1" value="0" style="margin-bottom:25px"> Request Service
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
-
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="provide"> Provide
+                                        <input class="form-check-input" name="request_service" type="radio" id="inlineCheckbox2" value="1"> Provide Service
 
                                     </div>
 
@@ -140,30 +142,25 @@
         <div class="container">
             <!-- Jumbotron -->
             <div class="jumbotron">
-                <h1>Welcome @</h1>
+                <h1>Welcome, {{ name }}!</h1>
                 <!--Display the persons name here-->
                 <p class="lead">Find Your Service, Request Your Service, Fufill Your Service</p>
-                <p><a class="btn btn-lg btn-success " data-target="#requestService" data-toggle="modal" role="button" name="show" id="show" style="margin-bottom: 25px">Add A New Service</a>
-                    
-                    <select class="form-control " placeholder="Category" id="sel1" name=sel1>
-                    <option>Category</option>
-                    <option>Food</option>
-                    <option>Tutoring</option>
-                    <option>Fashion</option>
-                    <option>Deliveries</option>
-                    <option>Technical Help</option>
-                    <option>Other</option>
-                    </select>
-                <a class="btn btn-lg btn-info" role="button" name="filter" id="filter" value="Filter" style="margin-top: 25px">Filter</a>
-                    </p>
+                    <p><a class="btn btn-lg btn-success " data-target="#requestService" data-toggle="modal" role="button" name="show" id="show" style="margin-bottom: 25px">Add A Service</a>
+
+                        <select class="form-control " placeholder="Category" id="filter_by" name=sel1>
+                        <option>All</option>
+                        <option>Transportion</option>
+                        <option>Food</option>
+                        <option>Tutoring</option>
+                        <option>Fashion</option>
+                        <option>Deliveries</option>
+                        <option>Technical Help</option>
+                        <option>Other</option>
+                        </select>
+                    <button class="btn btn-lg btn-info" role="button" name="filter" id="filter" value="Filter" style="margin-top: 25px" onclick="window.location.href = '/home/' + document.getElementById('filter_by').value;">Filter</button>
+                        </p>
             </div>
         </div>
-
-
-
-
-
-        <!----------------------------GRID-------------------------------->
 
 
         <div class="row">
@@ -179,134 +176,50 @@
                     </div>
                     <hr>
                 </div>
+                <form id="login-form" action="/register" method="POST" role="form" style="display: none;">
                 <div class="panel-body">
-                    <form id="login-form" action="/login" method="POST" role="form" style="display: block;">
-                        <div class="container">
-                            <div class="row">
-
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                    <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-
-                            </div>
+                    <div class="container">
+                        <div class="row">
+                            {% if services_req|length > 0 %}
+                                {% for s in services_req %}
+                                    <div class="col-md-3" style= "padding:10px;" onclick="window.location.href = '/service/{{ s.id }}'">
+                                        <a href="/service/{{ s.id }}"></a>
+                                            <img  style= "padding:10px;" src="../static/img/services/{{ s.filename }}" alt="Service" width="300" height="200" />
+                                          </a>
+                                        <div class="desc">Can you {{ s.title|lower }} for me? - ${{ '%0.2f'|format(s.price|float) }}</div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <center><h4>There are no services requested by university students. </h4></center>
+                            {% endif %}
                         </div>
-                    </form>
+                    </div>
                 </div>
+            </form>
+                <form id="register-form" action="/register" method="POST" role="form" style="display: none;">
                 <div class="panel-body">
-                    <form id="register-form" action="/register" method="POST" role="form" style="display: block;">
+                    <div class="container">
+                        <div class="row">
 
+                            {% if services_pro|length > 0 %}
+                                {% for s in services_pro %}
+                                    <div class="col-md-3" style= "padding:10px;" onclick="window.location.href = '/service/{{ s.id }}'">
+                                            <img  style= "padding:10px;" src="../static/img/services/{{ s.filename }}" alt="Service" width="300" height="200" />
+                                          </a>
+                                        <div class="desc">I can {{ s.title|lower }} for you.- ${{ '%0.2f'|format(s.price|float) }}</div>
+                                    </div>
 
-                        <div class="container">
-                            <div class="row">
-
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                        <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                      </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-                                <div class="col-md-3">
-                                    <a target="_blank" href="fjords.jpg">
-                                    <img src="../static/img/Sell.png" alt="Fjords" width="300" height="200">
-                                </a>
-                                    <div class="desc">Add a description of the image here</div>
-                                </div>
-
-                            </div>
+                                {% endfor %}
+                            {% else %}
+                                <center><h4>There are no services provided by university students. </h4></center>
+                            {% endif %}
                         </div>
-                    </form>
+                    </div>
                 </div>
+                </form>
             </div>
         </div>
-
-
+</div>
 
 
 
@@ -327,6 +240,7 @@
         <script>
             $(document).ready(function() {
                 $(".owl-carousel").owlCarousel();
+                document.getElementById("login-form-link").click();
             });
 
             $('.owl-carousel').owlCarousel({

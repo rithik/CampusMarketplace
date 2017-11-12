@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Campus Marketplace</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="../static/css/freelancer.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/css/index.css">
+    <link rel="stylesheet" href="../static/owl/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/owl/owl.theme.default.min.css">
+   
+    <!-- Custom Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    
+    
+    
+    
+    <link href="../static/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <!--<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">-->
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
+    <script type='text/javascript' src="../static/js/index.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top" class="index">
+    <nav id = "mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+      <div class="container-fluid">
+         <!--Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
+        </div>
+        <div style="margin-right:20px;" class="navbar-form navbar-right">
+            <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Log in/Register</button>
+        </div>
+        <!--Collect the nav links, forms, and other content for toggling -->
+
+      </div><!-- /.container-fluid -->
+    </nav>
+    
+    <div id="myModal" class="modal fade" role="dialog"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"> <button type="button" class="close" data-dismiss="modal">&times;</button><h4 class="modal-title"><center>Welcome to Campus Marketplace!</center></h4></div><div class="modal-body"><div class="panel-login"><div class="panel-heading panel panel-login"><div class="row"><div class="col-xs-6"> <a href="#" class="active" id="login-form-link">Login</a></div><div class="col-xs-6"> <a href="#" id="register-form-link">Register</a></div></div><hr></div><div class="panel-body"><div class="row"><div class="col-lg-12"><form id="login-form" action="/login" method="POST" role="form" style="display:block"><div class="form-group"> <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value=""></div><div class="form-group"> <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password"></div><div class="form-group"><div class="row"><div class="col-sm-6 col-sm-offset-3"> <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In"></div></div></div></form><form id="register-form" action="/register" method="POST" role="form" style="display:none"><div class="form-group"> <input type="text" name="first_name" id="first_name" tabindex="1" class="form-control" placeholder="First Name" value="Kash"></div><div class="form-group"> <input type="text" name="last_name" id="last_name" tabindex="1" class="form-control" placeholder="Last Name" value="Money"></div><div class="form-group"> <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="kash@gmail.com"></div><div class="form-group"> <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password" value="qwe"></div><div class="form-group"> <input type="password" name="confirm_password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password" value="qwe"></div><div class="form-group"><div class="row"><div class="col-sm-6 col-sm-offset-3"> <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-login" value="Register Now"></div></div></div></form></div></div></div></div></div></div></div></div></div>
+    
+    <div id="requestService" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><center>Request a Service</center></h4>
+              </div>
+              <div class="modal-body">
+                    <div class=" panel-login">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<form id="login-form" action="/login" method="POST" role="form" style="display: block;">
+										<div class="form-group">
+											<input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+										</div>
+										<div class="form-group">
+											<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+										</div>
+
+										<div class="form-group">
+											<div class="row">
+												<div class="col-sm-6 col-sm-offset-3">
+													<input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+												</div>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+              </div>
+            </div>
+
+          </div>
+    
+    <!-- Header -->
+    
+    <div>
+        <div class="container">
+             <!-- Jumbotron -->
+              <div class="jumbotron" >
+                <h1>Welcome HEADASS</h1>
+                <p class="lead">Find Your Service, Request Your Service, Fufill Your Service</p>
+                <p><a class="btn btn-lg btn-success " href="#" role="button" name="show" id="show">Find A Service</a>
+                <br></br>
+                <select class="form-control " placeholder="Category" id="sel1" name=sel1>
+                    <option>Category</option>
+                    <option>Food</option>
+                    <option>Tutoring</option>
+                    <option>Fashion</option>
+                    <option>Deliveries</option>
+                    <option>Technical Help</option>
+                    <option>Other</option>
+                </select>
+                </p>
+              </div>
+        </div>
+ 
+    <div class="owl-carousel owl-theme">
+    <div class="item"><h4>
+        <img src="../static/img/n.png" height="200px" width="200px" border="1px"></div>
+    <div class="item">
+        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
+    </div>
+    <div class="item">
+        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
+    </div>
+    <div class="item">
+        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
+    </div>
+    <div class="item">
+        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
+    </div>
+    <div class="item">
+        <img src="../static/img/n.png" height="200px" width="200px" border="1px">    
+    </div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    </div>
+    
+ </div>
+
+
+    
+
+<!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; Campus Marketplace 2017</p>
+      </footer>
+
+    <script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../static/owl/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        $(".owl-carousel").owlCarousel();});
+        
+        $('.owl-carousel').owlCarousel({
+            rtl:true,
+            loop:true,
+            margin:10,
+            nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        })
+    </script>
+</body>
+
+
+</html>

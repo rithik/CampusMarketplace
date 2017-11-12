@@ -26,6 +26,24 @@
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
     <script type='text/javascript' src='https://cdn.firebase.com/js/client/1.0.15/firebase.js'></script>
     <script type='text/javascript' src="../static/js/index.js"></script>
+    <style>
+    .flashes{
+        background: #cee5F5;
+        padding: 0.5em;
+        border: 1px solid #000;
+        margin-top:15px;
+        float:right;
+        list-style: none;
+        height:60px;
+        border-radius: 5px;
+        opacity:0.9;
+        background-color: #000;
+        color: #fff;
+        margin-right:20px;
+
+    }
+
+    </style>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,7 +64,9 @@
                 <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
         </div>
         <div style="margin-right:20px;" class="navbar-form navbar-right">
-            <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Log in/Register</button>
+            {% if logged_in == False %}
+                <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Log in/Register</button>
+            {% endif %}
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
 
@@ -131,8 +151,17 @@
     <!-- Header -->
 
     <header style = "background-image: url(&quot;../static/img/campustour.jpg&quot;);">
-
+    {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class="flashes" id="ul-messages">
+                {% for message in messages %}
+                  <li class="flash">{{ message }}</li>
+                {% endfor %}
+                </ul>
+              {% endif %}
+            {% endwith %}
         <div class="container" id="maincontent" tabindex="-1">
+
             <div class="row">
                 <div  class="col-lg-12">
                     <center>
@@ -327,7 +356,14 @@
 
     <!-- Theme JavaScript -->
     <!--<script src="../static/js/freelancer.min.js"></script>-->
-
+    <script>
+        $( document ).ready(function() {
+          setTimeout(
+            function() {
+              document.getElementById('ul-messages').style.display='none';
+            }, 5000);
+        });
+    </script>
 </body>
 
 </html>

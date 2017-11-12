@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from flask_sqlalchemy import SQLAlchemy
 import os
 from models import User, Service
@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.config['APP_SETTINGS'] = 'Config.DevelopmentConfig'
 app.config['SQLALCHEMY_DATABASE_URI'] = settings.DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+app.secret_key = settings.SECRET_KEY
 
 
 #db.session.add(u)
@@ -20,17 +21,41 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 def shutdown_session(exception=None):
     db_session.remove()
 
+@app.route('/signout', methods=["GET"])
+def signout():
+    session.pop('messages', None)
+    flash('You were logged out!')
+    return redirect(url_for('home_page'))
+
+@app.route('/service/add', methods=["GET"])
+def service_add():
+    messages = session["messages"]
+    user = User.query.filter_by(id=messages[messages.index(":")+1:len(messages)-1]).first()
+    name = user.first_name + " " + user.last_name
+    return render_template("services.html", name=name, email=user.email)
+
 @app.route('/account', methods=["GET"])
 def account():
-    messages = request.args["messages"]
-    print(messages[messages.index(":")+1:len(messages)-1], file=sys.stderr)
+    messages = session["messages"]
     user = User.query.filter_by(id=messages[messages.index(":")+1:len(messages)-1]).first()
     name = user.first_name + " " + user.last_name
     return render_template("account.html", name=name, email=user.email)
 
 @app.route('/')
 def home_page():
-    return render_template("index.html", page="home", success=True, error="")
+    data = session.get('messages', {})
+    if len(data) == 0:
+        return render_template("index.html", logged_in=False)
+    else:
+        return redirect(url_for('.account'))
+
+@app.route('/home')
+def home_page_view():
+    data = session.get('messages', {})
+    if len(data) == 0:
+        return render_template("index.html", logged_in=False)
+    else:
+        return render_template("index.html", logged_in=True)
 
 @app.route('/login', methods=["POST"])
 def login():
@@ -39,12 +64,14 @@ def login():
         password = encode(request.form["password"])
         u = User.query.filter_by(email=email).count()
         if u == 0:
-            return render_template("index.html", page="login", success=False, error="There is no account associated with this email!")
+            flash("No account was created with this email address!")
+            return redirect(url_for('.home_page'))
         user = User.query.filter_by(email=email).first()
         if not password == user.password:
-            return render_template("index.html", page="login", success=False, error="Incorrect Password!")
-        messages = json.dumps({"user":user.id})
-        return redirect(url_for('.account', messages=messages))
+            flash("Invalid Password!")
+            return redirect(url_for('.home_page'))
+        session['messages'] = json.dumps({"user":user.id})
+        return redirect(url_for('.account'))
 
 
 @app.route('/register', methods=["POST"])
@@ -55,17 +82,22 @@ def register():
         email = request.form["email"]
         password = request.form["password"]
         confirm_password = request.form["confirm_password"]
+        if not email.index("@") > 0 and not email.index(".") > email.index("@"):
+            flash("Invalid Email Address!")
+            return redirect(url_for('.home_page'))
         if not confirm_password == password:
-            return render_template("index.html", page="register", success=False, error="The two passwords you entered are not the same.")
+            flash("The two passwords you entered are not the same.")
+            return redirect(url_for('.home_page'))
         u = User.query.filter_by(email=email).count()
         if u == 0:
             new_user = User(first_name, last_name, email, encode(password))
             db_session.add(new_user)
             db_session.commit()
             print('Created User', file=sys.stderr)
-            return render_template("index.html", page="register", success=True, error="")
-        return render_template("index.html", page="register", success=False, error="There is already a user created with this email address.")
-
+            flash("Registered successfully!")
+            return redirect(url_for('.home_page'))
+        flash("There is already a user created with this email address!")
+        return redirect(url_for('.home_page'))
 
 
 @app.route('/<name>')

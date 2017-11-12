@@ -3,7 +3,9 @@
   margin: 0 auto;
   width: 80%;
 }
-
+.bs{
+	display: inline-block;
+}
 .dimmer {
   display: none;
     background: #000;

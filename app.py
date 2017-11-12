@@ -1,33 +1,71 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 import os
 from models import User, Service
 import settings
+import sys
+from database import db_session
+import json
 
 app = Flask(__name__)
 app.config['APP_SETTINGS'] = 'Config.DevelopmentConfig'
 app.config['SQLALCHEMY_DATABASE_URI'] = settings.DB_URL
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
+
 
 #db.session.add(u)
 #db.session.commit()
 
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db_session.remove()
+
+@app.route('/account', methods=["GET"])
+def account():
+    messages = request.args["messages"]
+    print(messages[messages.index(":")+1:len(messages)-1], file=sys.stderr)
+    user = User.query.filter_by(id=messages[messages.index(":")+1:len(messages)-1]).first()
+    name = user.first_name + " " + user.last_name
+    return render_template("account.html", name=name, email=user.email)
+
 @app.route('/')
 def home_page():
-    return render_template("index.html", error="")
+    return render_template("index.html", page="home", success=True, error="")
 
 @app.route('/login', methods=["POST"])
 def login():
     if request.method == "POST":
-        username = request.form["username"]
+        email = request.form["email"]
         password = encode(request.form["password"])
-        u = User.query.filter_by(email=username).first()
-        if u == None:
-            return render_template("index.html", error="There is no account associated with this email!")
-        else:
-            if not password == u.password:
-                return render_template("index.html", error="Incorrect Password!")
+        u = User.query.filter_by(email=email).count()
+        if u == 0:
+            return render_template("index.html", page="login", success=False, error="There is no account associated with this email!")
+        user = User.query.filter_by(email=email).first()
+        if not password == user.password:
+            return render_template("index.html", page="login", success=False, error="Incorrect Password!")
+        messages = json.dumps({"user":user.id})
+        return redirect(url_for('.account', messages=messages))
+
+
+@app.route('/register', methods=["POST"])
+def register():
+    if request.method == "POST":
+        first_name = request.form["first_name"]
+        last_name = request.form["last_name"]
+        email = request.form["email"]
+        password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
+        if not confirm_password == password:
+            return render_template("index.html", page="register", success=False, error="The two passwords you entered are not the same.")
+        u = User.query.filter_by(email=email).count()
+        if u == 0:
+            new_user = User(first_name, last_name, email, encode(password))
+            db_session.add(new_user)
+            db_session.commit()
+            print('Created User', file=sys.stderr)
+            return render_template("index.html", page="register", success=True, error="")
+        return render_template("index.html", page="register", success=False, error="There is already a user created with this email address.")
+
 
 
 @app.route('/<name>')

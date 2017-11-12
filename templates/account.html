@@ -6,20 +6,20 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-    
-        <title>Campus Marketplace- Web 2017</title>
-    
+
+        <title>Campus Marketplace</title>
+
         <!-- Bootstrap Core CSS -->
         <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        
+
         <!-- Theme CSS -->
         <link href="../static/vendor/css/freelancer.css" rel="stylesheet">
-    
+
         <!-- Custom Fonts -->
         <link href="../static/vendor/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> 
-        
+        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+
         <!--Script-->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
@@ -29,7 +29,6 @@
     </head>
     <body id="page-top" class="index" style = "background-image: url(&quot;https://farm4.staticflickr.com/3800/11694830135_e994c3cdb2_k.jpg&quot;);">
         <!-- Navigation -->
-<div id="skipnav"><a href="#maincontent">Skip to main content</a></div>
         <nav id = "mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
       <div class="container-fluid">
          <!--Brand and toggle get grouped for better mobile display -->
@@ -39,70 +38,39 @@
                 </button>
                 <a class="navbar-brand" href="#page-top">Campus Marketplace</a>
         </div>
-        <div class="navbar-form navbar-right">
-            <button id="sign" class="btn btn-primary text-justify text-uppercase">Sign Out</button>
+        <div style="margin-right:20px;" class="navbar-form navbar-right">
+            <button type="button" class="btn btn-primary text-justify text-uppercase" data-toggle="modal" data-target="#myModal">Sign Out</button>
         </div>
         <!--Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-                <li class="page-scroll">
-                    <a href="services.html">Services</a>
-                </li>
-                <li class = "page-scroll">
-                    <a href="#about">About Us</a>
-                </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
+
       </div><!-- /.container-fluid -->
     </nav>
-    <section>    
-    
-    <div class="container main-center " style = "position: absolute;top: 50%; left: 50%; 
+    <section>
+
+    <div class="container main-center " style = "position: absolute;top: 50%; left: 50%;
     margin-right: -50%; transform: translate(-50%, -50%)">
       <div class="row main">
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-3 col-lg-offset-3" >
           <div class="panel panel-info">
             <div class="panel-heading">
-              <h3 id = 'user' class="panel-title">Your Name</h3>
+              <h3 id = 'user' class="panel-title">{{ name }}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
                 <div class="col-md-3 col-lg-3 " align="center"> <img alt="User Pic" id = "picture" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnEzJbPtsZ-5y88ICWHTOt-d5POUYv02F0ARVgwzKzUqCDJ1bo" class="img-circle img-responsive"> </div>
-                <div class=" col-md-9 col-lg-9 "> 
+                <div class=" col-md-9 col-lg-9 ">
                   <table class="table table-user-information">
                     <tbody>
                       <tr>
                         <td>Name:</td>
                         <td>
-                        <span id= 'name'>Name</span>
+                        <span id= 'name'>{{ name }}</span>
                         <input type="text" value = 'Edit Name' id = "editname" class = "hidden"/>
                         </td>
                       </tr>
-                      <tr>
-                        <td>Date of Birth</td>
-                        <td >
-                          <span id = "birth" >01/24/1988</span>
-                          <input type="text" value = 'Edit Birthday' id = "editbirth" class = "hidden"/>
-                        </td>
-                      </tr>
-                         <tr>
-                             <tr>
-                      <tr>
                         <td>Email</td>
-                        <td><a id = "email" href="mailto:info@support.com">email</a>
+                        <td><a id = "email" href="mailto:'{{ email }}'">{{ email }}</a>
                         <input type="text" id = 'editemail' value = 'Edit Email' class = "hidden"/></td>
-                      </tr>
-                      <tr>
-                        <td>Gender</td>
-                        <td>
-                        <span id= 'gender'>Gender</span>
-                        <input type="text" value = 'Edit Gender' id = 'editgender' class = "hidden" /></td>
-                      </tr>
-                        <td>Phone Number</td>
-                        <td>
-                        <span id= 'phone'>Enter Phone Number</span>
-                        <input type="text" value = 'Edit Phone Number' id = "editphone" class = "hidden"/>
-                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -111,7 +79,7 @@
             </div>
                  <div class="panel-footer">
                         <!--<a data-original-title="Broadcast Message" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-envelope"></i></a>-->
-                            <data-original-title="Edit this user" data-toggle="tooltip" type="button" id="edit" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i>
+                            <!-- <data-original-title="Edit this user" data-toggle="tooltip" type="button" id="edit" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i> -->
                     </div>
           </div>
         </div>

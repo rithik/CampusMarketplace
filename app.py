@@ -56,10 +56,10 @@ def signout():
 def buy(id_num):
     messages = session["messages"]
     service = Service.query.filter_by(id=id_num).first()
-    if service.completed_by == -1:
-        message = "Please view your order confirmation on our website at: http://localhost:5000/buy/" + id_num
-        send("Campus Marketplace Order Confirmation", message, user.email)
-        send("Campus Marketplace Order Confirmation", message, me.email)
+    # if service.completed_by == -1:
+    #     message = "Please view your order confirmation on our website at: http://localhost:5000/buy/" + id_num
+    #     send("Campus Marketplace Order Confirmation", message, user.email)
+    #     send("Campus Marketplace Order Confirmation", message, me.email)
     service.completed_by = int(messages[messages.index(":")+1:len(messages)-1])
     me = User.query.filter_by(id=int(messages[messages.index(":")+1:len(messages)-1])).first()
     user = User.query.filter_by(id=service.requested_by).first()
@@ -122,7 +122,6 @@ def account():
 
 @app.route('/home/<filter_category>', methods=["GET"])
 def service_listings(filter_category="All"):
-
     data = session.get('messages', {})
     if len(data) == 0:
         return render_template("index.html", logged_in=False)

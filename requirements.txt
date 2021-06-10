@@ -11,7 +11,7 @@ cycler==0.10.0
 Cython==0.27.1
 DateJS==0.1.12
 dill==0.2.7.1
-Django==1.9.8
+Django==2.2.24
 django-jinja==2.3.1
 docker-py==1.7.2
 dockerpty==0.4.1
